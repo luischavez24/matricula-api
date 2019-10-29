@@ -19,7 +19,7 @@ public class ClassroomsController {
     }
 
     @GetMapping("")
-    public ResponseEntity<?> index() {
+    public ResponseEntity<?> findAllClassrooms() {
         return ResponseEntity.ok(classroomsService.findAllClassrooms());
     }
 

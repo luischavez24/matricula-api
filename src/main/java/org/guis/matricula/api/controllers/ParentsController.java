@@ -22,12 +22,12 @@ public class ParentsController {
     }
 
     @GetMapping("")
-    public ResponseEntity<?> findAllStudents() {
+    public ResponseEntity<?> findAllParents() {
         return ResponseEntity.ok(parentsService.findAllParents());
     }
 
     @GetMapping("/{parentDni}")
-    public ResponseEntity<?> findStudentByDni(@PathVariable String parentDni) {
+    public ResponseEntity<?> findParentByDni(@PathVariable String parentDni) {
 
         Optional<Parent> requestParent = parentsService.findByDni(parentDni);
 
