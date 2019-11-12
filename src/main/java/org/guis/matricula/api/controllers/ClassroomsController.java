@@ -3,6 +3,8 @@ package org.guis.matricula.api.controllers;
 import org.guis.matricula.api.entities.Classroom;
 import org.guis.matricula.api.services.ClassroomsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +32,10 @@ public class ClassroomsController {
         Classroom classroom = new Classroom();
         classroom.setSectionId(sectionId);
         classroom.setGradeId(gradeId);
-
-        return ResponseEntity.ok(classroomsService.findAllEnrollments(classroom, academicPeriod, page.orElse(0), size.orElse(20)));
+        if(page.isPresent() && size.isPresent()) {
+            return ResponseEntity.ok(classroomsService.findAllEnrollments(classroom, academicPeriod, PageRequest.of(page.get(), size.get())));
+        } else {
+            return ResponseEntity.ok(classroomsService.findAllEnrollments(classroom, academicPeriod, Pageable.unpaged()));
+        }
     }
 }

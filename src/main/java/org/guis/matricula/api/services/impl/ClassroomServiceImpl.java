@@ -8,6 +8,7 @@ import org.guis.matricula.api.services.ClassroomsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class ClassroomServiceImpl implements ClassroomsService {
     }
 
     @Override
-    public Page<Enrollment> findAllEnrollments(Classroom classroom, int academicYear, int page, int size) {
-        return enrollmentRepository.findAllByClassroomAndAcademicYear(PageRequest.of(page, size), classroom, academicYear);
+    public Page<Enrollment> findAllEnrollments(Classroom classroom, int academicYear, Pageable pageable) {
+        return enrollmentRepository.findAllByClassroomAndAcademicYear(pageable, classroom, academicYear);
     }
 }
