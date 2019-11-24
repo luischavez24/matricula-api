@@ -1,6 +1,7 @@
 package org.guis.matricula.api.controllers;
 
 import org.guis.matricula.api.entities.Parent;
+import org.guis.matricula.api.entities.Student;
 import org.guis.matricula.api.services.StudentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,10 +31,10 @@ public class StudentsController {
     @GetMapping("/{studentDni}")
     public ResponseEntity<?> findStudentByDni(@PathVariable String studentDni) {
 
-        Optional<Parent> requestParent = Optional.empty(); //studentsService.findByDni(studentDni);
+        Optional<Student> requestStudent =studentsService.findByDni(studentDni);
 
-        if(requestParent.isPresent()) {
-            return ResponseEntity.ok(requestParent.get());
+        if(requestStudent.isPresent()) {
+            return ResponseEntity.ok(requestStudent.get());
         } else {
             return ResponseEntity.notFound().build();
         }
